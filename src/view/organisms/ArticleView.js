@@ -9,7 +9,7 @@ function SpeechCustom({ text }) {
   const onClick = function () {
     let utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-GB";
-    utterance.rate = 1;
+    utterance.rate = 1.2;
     speechSynthesis.speak(utterance);
   };
 
