@@ -46,6 +46,8 @@ export default class HomePage extends Component {
   }
 
   gotoArticleIndex() {
+    localStorage.clear();
+    window.location.reload();
     this.setState({ mode: "index" });
   }
 
