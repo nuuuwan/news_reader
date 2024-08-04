@@ -1,6 +1,11 @@
 import { Component } from "react";
 //
-import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  TextField,
+} from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
 
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -22,12 +27,17 @@ export default class HomePage extends Component {
       mode: "index",
       articleMetadataList: undefined,
       activeArticleIndex: 0,
+      searchText: undefined,
     };
   }
 
   async componentDidMount() {
     const articleMetadataList = await ArticleMetadata.listAll();
     this.setState({ articleMetadataList });
+  }
+
+  setSearchText(searchText) {
+    this.setState({ searchText });
   }
 
   setActiveArticleIndex(activeArticleIndex) {
@@ -75,13 +85,15 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { mode, articleMetadataList, activeArticleIndex } = this.state;
+    const { mode, articleMetadataList, activeArticleIndex, searchText } =
+      this.state;
 
     if (mode === "index") {
       return (
         <ArticleMetadataListView
           articleMetadataList={articleMetadataList}
           setActiveArticleIndex={this.setActiveArticleIndex.bind(this)}
+          searchText={searchText}
         />
       );
     } else {
@@ -95,6 +107,12 @@ export default class HomePage extends Component {
   }
 
   renderFooter() {
+    const { mode } = this.state;
+    const onChangeSearchText = function (e) {
+      const searchText = e.target.value;
+      this.setSearchText(searchText);
+    }.bind(this);
+
     return (
       <Box
         sx={{
@@ -103,9 +121,17 @@ export default class HomePage extends Component {
           left: 0,
           right: 0,
           index: 1000,
+          backgroundColor: "#f8f8f8",
         }}
       >
-        <BottomNavigation sx={{ paddingBottom: 1, backgroundColor: "#f8f8f8" }}>
+        {mode === "index" ? (
+          <TextField
+            fullWidth
+            placeholder="Input Search Text"
+            onChange={onChangeSearchText}
+          />
+        ) : null}
+        <BottomNavigation sx={{ paddingBottom: 1 }}>
           <BottomNavigationAction
             onClick={this.gotoFirstArticle.bind(this)}
             icon={<FirstPageIcon />}

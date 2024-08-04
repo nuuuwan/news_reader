@@ -38,6 +38,10 @@ export default class ArticleMetadata {
     return "#080";
   }
 
+  isMatch(searchText) {
+    return this.title.toLowerCase().includes(searchText.toLowerCase());
+  }
+
   static fromDict(d) {
     return new ArticleMetadata(d.title, d.url, d.ut, d.dir_path_unix);
   }
