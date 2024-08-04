@@ -1,8 +1,26 @@
 import { Component } from "react";
 //
-import { Link, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Link, Stack, Typography } from "@mui/material";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 //
 import { Article } from "../../nonview/core";
+
+function SpeechCustom({ text }) {
+  const onClick = function () {
+    let utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-GB";
+    utterance.rate = 1.5;
+    speechSynthesis.speak(utterance);
+  };
+
+  return (
+    <Box sx={{ textAlign: "right" }}>
+      <IconButton onClick={onClick}>
+        <RecordVoiceOverIcon />
+      </IconButton>
+    </Box>
+  );
+}
 
 export default class ArticleView extends Component {
   constructor(props) {
@@ -31,6 +49,8 @@ export default class ArticleView extends Component {
           </Typography>
         </Stack>
         <Typography variant="h5">{article.articleMetadata.title}</Typography>
+        <SpeechCustom text={article.articleMetadata.title} />
+
         <Link href={article.articleMetadata.url} target="_blank">
           <Typography variant="caption" color={article.articleMetadata.color}>
             {article.articleMetadata.url}
@@ -38,9 +58,10 @@ export default class ArticleView extends Component {
         </Link>
         {article.bodyParagraphs.map(function (paragraph, index) {
           return (
-            <Typography key={index} variant="body1">
-              {paragraph}
-            </Typography>
+            <Box key={index}>
+              <Typography variant="body1">{paragraph}</Typography>
+              <SpeechCustom text={paragraph} />
+            </Box>
           );
         })}
       </Stack>
@@ -48,9 +69,10 @@ export default class ArticleView extends Component {
   }
 
   render() {
+    const { articleMetadata } = this.props;
     const { article } = this.state;
     if (!article) {
-      return "Loading...";
+      return `Loading "${articleMetadata.title}"...`;
     }
     return this.renderArticle(article);
   }

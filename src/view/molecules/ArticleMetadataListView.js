@@ -6,6 +6,9 @@ export default function ArticleMetadataListView({
   articleMetadataList,
   setActiveArticleIndex,
 }) {
+  if (!articleMetadataList) {
+    return "Loading Index...";
+  }
   return (
     <Stack direction="column" gap={1}>
       {articleMetadataList.map(function (articleMetadata, index) {

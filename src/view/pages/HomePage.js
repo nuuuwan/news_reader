@@ -76,9 +76,7 @@ export default class HomePage extends Component {
 
   renderBody() {
     const { mode, articleMetadataList, activeArticleIndex } = this.state;
-    if (!articleMetadataList) {
-      return "Loading...";
-    }
+
     if (mode === "index") {
       return (
         <ArticleMetadataListView
