@@ -19,6 +19,25 @@ export default class ArticleMetadata {
     this.dirPathUnix = dirPathUnix;
   }
 
+  get dateStr() {
+    const date = new Date(this.ut * 1000);
+    return date.toDateString();
+  }
+
+  get source() {
+    return this.url.split("/")[2].replaceAll("www.", "");
+  }
+
+  get color() {
+    if (this.source.includes(".lk")) {
+      return "#800";
+    }
+    if (this.source.includes(".com")) {
+      return "#f80";
+    }
+    return "#080";
+  }
+
   static fromDict(d) {
     return new ArticleMetadata(d.title, d.url, d.ut, d.dir_path_unix);
   }

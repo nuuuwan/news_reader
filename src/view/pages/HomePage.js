@@ -1,7 +1,8 @@
 import { Component } from "react";
-import { Box } from "@mui/material";
 //
 import { ArticleMetadata } from "../../nonview/core";
+//
+import { ArticleMetadataListView } from "../../view/molecules";
 //
 export default class HomePage extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ export default class HomePage extends Component {
     if (!articleMetadataList) {
       return "Loading...";
     }
-    return <Box>{JSON.stringify(articleMetadataList)}</Box>;
+    return (
+      <ArticleMetadataListView articleMetadataList={articleMetadataList} />
+    );
   }
 }

@@ -21,7 +21,7 @@ const THEME = createTheme({
     },
   },
   typography: {
-    fontFamily: ["sans-serif"].join(","),
+    fontFamily: ["Antic", "sans-serif"].join(","),
     fontSize: 14,
   },
 });
@@ -30,7 +30,7 @@ export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={THEME}>
-        <Box sx={{ m: 1, p: 1 }}>
+        <Box sx={{ maxWidth: "90%", margin: "auto", marginTop: 4 }}>
           <HomePage />
         </Box>
       </ThemeProvider>
