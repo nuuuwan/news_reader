@@ -102,11 +102,10 @@ export default class HomePage extends Component {
           bottom: 0,
           left: 0,
           right: 0,
-
           index: 1000,
         }}
       >
-        <BottomNavigation sx={{ backgroundColor: "#f0f0f0" }}>
+        <BottomNavigation sx={{ paddingBottom: 1, backgroundColor: "#f8f8f8" }}>
           <BottomNavigationAction
             onClick={this.gotoFirstArticle.bind(this)}
             icon={<FirstPageIcon />}
