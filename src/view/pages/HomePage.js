@@ -1,12 +1,6 @@
 import { Component } from "react";
 //
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
 
 import FirstPageIcon from "@mui/icons-material/FirstPage";
