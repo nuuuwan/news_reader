@@ -2,20 +2,19 @@ import { Stack } from "@mui/material";
 //
 import ArticleMetadataView from "./ArticleMetadataView";
 //
-export default function ArticleMetadataListView({ articleMetadataList }) {
-  let prevDateStr = undefined;
+export default function ArticleMetadataListView({
+  articleMetadataList,
+  setActiveArticleIndex,
+}) {
   return (
     <Stack direction="column" gap={1}>
-      {articleMetadataList.map(function (articleMetadata, i) {
-        const dateStr = articleMetadata.dateStr;
-        const hasNewDate = dateStr !== prevDateStr;
-        prevDateStr = dateStr;
-
+      {articleMetadataList.map(function (articleMetadata, index) {
         return (
           <ArticleMetadataView
-            key={i}
+            key={index}
             articleMetadata={articleMetadata}
-            hasNewDate={hasNewDate}
+            setActiveArticleIndex={setActiveArticleIndex}
+            index={index}
           />
         );
       })}
