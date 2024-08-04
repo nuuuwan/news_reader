@@ -5,6 +5,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import HomePage from "./view/pages/HomePage.js";
 
+const MAX_WIDTH = Math.min(800, window.innerWidth * 0.8);
+
 const THEME = createTheme({
   palette: {
     primary: {
@@ -30,7 +32,7 @@ export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={THEME}>
-        <Box sx={{ maxWidth: "90%", margin: "auto", marginTop: 4 }}>
+        <Box sx={{ maxWidth: MAX_WIDTH, margin: "auto", marginTop: 4 }}>
           <HomePage />
         </Box>
       </ThemeProvider>
