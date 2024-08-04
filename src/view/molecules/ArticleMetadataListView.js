@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 //
 import ArticleMetadataView from "./ArticleMetadataView";
 //
@@ -7,7 +7,7 @@ export default function ArticleMetadataListView({
   setActiveArticleIndex,
 }) {
   if (!articleMetadataList) {
-    return "Loading Index...";
+    return <Typography variant="body1">Loading Index...</Typography>;
   }
   return (
     <Stack direction="column" gap={1}>

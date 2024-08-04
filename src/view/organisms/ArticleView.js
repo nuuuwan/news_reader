@@ -72,7 +72,9 @@ export default class ArticleView extends Component {
     const { articleMetadata } = this.props;
     const { article } = this.state;
     if (!article) {
-      return `Loading "${articleMetadata.title}"...`;
+      return (
+        <Typography variant="body1">{`Loading "${articleMetadata.title}"...`}</Typography>
+      );
     }
     return this.renderArticle(article);
   }
