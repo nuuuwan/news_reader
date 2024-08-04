@@ -42,6 +42,7 @@ export default class HomePage extends Component {
 
   setActiveArticleIndex(activeArticleIndex) {
     this.setState({ mode: "article", activeArticleIndex });
+    window.scrollTo(0, 0);
   }
 
   gotoArticleIndex() {
@@ -52,11 +53,8 @@ export default class HomePage extends Component {
     let { activeArticleIndex } = this.state;
 
     const newActiveArticleIndex = Math.max(0, activeArticleIndex - 1);
-    console.debug({ activeArticleIndex, newActiveArticleIndex });
-    this.setState({
-      activeArticleIndex: newActiveArticleIndex,
-      mode: "article",
-    });
+
+    this.setActiveArticleIndex(newActiveArticleIndex);
   }
 
   gotoNextArticle() {
@@ -66,22 +64,15 @@ export default class HomePage extends Component {
       articleMetadataList.length - 1,
       activeArticleIndex + 1
     );
-    console.debug({ activeArticleIndex, newActiveArticleIndex });
-    this.setState({
-      activeArticleIndex: newActiveArticleIndex,
-      mode: "article",
-    });
+    this.setActiveArticleIndex(newActiveArticleIndex);
   }
 
   gotoFirstArticle() {
-    this.setState({ activeArticleIndex: 0, mode: "article" });
+    this.setActiveArticleIndex(0);
   }
 
   gotoLastArticle() {
-    this.setState({
-      activeArticleIndex: this.state.articleMetadataList.length - 1,
-      mode: "article",
-    });
+    this.setActiveArticleIndex(this.state.articleMetadataList.length - 1);
   }
 
   renderBody() {
