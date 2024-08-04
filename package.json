@@ -1,5 +1,6 @@
 {
   "name": "news_reader",
+  "homepage": "https://nuuuwan.github.io/news_reader",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
