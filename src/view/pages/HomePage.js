@@ -7,12 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
-
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import LastPageIcon from "@mui/icons-material/LastPage";
-
+import RefreshIcon from "@mui/icons-material/Refresh";
 //
 import { ArticleMetadata } from "../../nonview/core";
 //
@@ -46,35 +41,12 @@ export default class HomePage extends Component {
   }
 
   gotoArticleIndex() {
-    localStorage.clear();
-    window.location.reload();
     this.setState({ mode: "index" });
   }
 
-  gotoPreviousArticle() {
-    let { activeArticleIndex } = this.state;
-
-    const newActiveArticleIndex = Math.max(0, activeArticleIndex - 1);
-
-    this.setActiveArticleIndex(newActiveArticleIndex);
-  }
-
-  gotoNextArticle() {
-    let { activeArticleIndex, articleMetadataList } = this.state;
-
-    const newActiveArticleIndex = Math.min(
-      articleMetadataList.length - 1,
-      activeArticleIndex + 1
-    );
-    this.setActiveArticleIndex(newActiveArticleIndex);
-  }
-
-  gotoFirstArticle() {
-    this.setActiveArticleIndex(0);
-  }
-
-  gotoLastArticle() {
-    this.setActiveArticleIndex(this.state.articleMetadataList.length - 1);
+  refresh() {
+    localStorage.clear();
+    window.location.reload();
   }
 
   renderBody() {
@@ -126,24 +98,15 @@ export default class HomePage extends Component {
         ) : null}
         <BottomNavigation sx={{ paddingBottom: 1 }}>
           <BottomNavigationAction
-            onClick={this.gotoFirstArticle.bind(this)}
-            icon={<FirstPageIcon />}
+            onClick={this.refresh.bind(this)}
+            icon={<RefreshIcon />}
           ></BottomNavigationAction>
-          <BottomNavigationAction
-            onClick={this.gotoPreviousArticle.bind(this)}
-            icon={<NavigateBeforeIcon />}
-          ></BottomNavigationAction>
-          <BottomNavigationAction
-            onClick={this.gotoNextArticle.bind(this)}
-            icon={<NavigateNextIcon />}
-          ></BottomNavigationAction>
-          <BottomNavigationAction
-            onClick={this.gotoLastArticle.bind(this)}
-            icon={<LastPageIcon />}
-          ></BottomNavigationAction>{" "}
           <BottomNavigationAction
             onClick={this.gotoArticleIndex.bind(this)}
-            icon={<ListIcon />}
+            icon={
+              <ListIcon sx={{ color: mode === "index" ? "#eee" : "#000" }} />
+            }
+            disabled={mode === "index"}
           ></BottomNavigationAction>
         </BottomNavigation>
       </Box>
