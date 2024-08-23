@@ -13,7 +13,7 @@ function SpeechCustom({ text }) {
     const onClickStart = function () {
       let utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "en-GB";
-      utterance.rate = 1.5;
+      utterance.rate = 1.2;
       speechSynthesis.speak(utterance);
       setIsSpeaking(true);
     };
