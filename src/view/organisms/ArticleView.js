@@ -2,14 +2,12 @@ import { Component, useState } from "react";
 //
 import { Box, IconButton, Link, Stack, Typography } from "@mui/material";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-import StopIcon from '@mui/icons-material/Stop';
+import StopIcon from "@mui/icons-material/Stop";
 //
 import { Article } from "../../nonview/core";
 
 function SpeechCustom({ text }) {
-
   const [isSpeaking, setIsSpeaking] = useState(false);
-
 
   if (!isSpeaking) {
     const onClickStart = function () {
@@ -19,7 +17,7 @@ function SpeechCustom({ text }) {
       speechSynthesis.speak(utterance);
       setIsSpeaking(true);
     };
-  
+
     return (
       <Box sx={{ textAlign: "right" }}>
         <IconButton onClick={onClickStart}>
@@ -41,8 +39,6 @@ function SpeechCustom({ text }) {
       </IconButton>
     </Box>
   );
-
-
 }
 
 export default class ArticleView extends Component {
