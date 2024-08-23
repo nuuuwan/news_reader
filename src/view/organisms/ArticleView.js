@@ -1,25 +1,48 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 //
 import { Box, IconButton, Link, Stack, Typography } from "@mui/material";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import StopIcon from '@mui/icons-material/Stop';
 //
 import { Article } from "../../nonview/core";
 
 function SpeechCustom({ text }) {
-  const onClick = function () {
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-GB";
-    utterance.rate = 1.2;
-    speechSynthesis.speak(utterance);
+
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+
+  if (!isSpeaking) {
+    const onClickStart = function () {
+      let utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-GB";
+      utterance.rate = 1.5;
+      speechSynthesis.speak(utterance);
+      setIsSpeaking(true);
+    };
+  
+    return (
+      <Box sx={{ textAlign: "right" }}>
+        <IconButton onClick={onClickStart}>
+          <RecordVoiceOverIcon />
+        </IconButton>
+      </Box>
+    );
+  }
+
+  const onClickStop = function () {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
   };
 
   return (
     <Box sx={{ textAlign: "right" }}>
-      <IconButton onClick={onClick}>
-        <RecordVoiceOverIcon />
+      <IconButton onClick={onClickStop}>
+        <StopIcon />
       </IconButton>
     </Box>
   );
+
+
 }
 
 export default class ArticleView extends Component {
